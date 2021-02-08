@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -29,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
     Button submitButton;
     Button fetchButton;
     TextView fetchInfo;
+    TextView locationJohn;
+    TextView locationJane;
 
     public DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("user locations").document("John");
+    public DocumentReference mDocRef2 = FirebaseFirestore.getInstance().collection("user locations").document("Jane Doe");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,33 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+/*
+        public void getLocation(){
+            final GeoPoint[] b = new GeoPoint[1];
+            mDocRef2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        b[0] = documentSnapshot.getGeoPoint("location");
+                    }
+                }
+            });
+            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+               @Override
+               public void onSuccess(DocumentSnapshot documentSnapshot) {
+                   if (documentSnapshot.exists()) {
+                       GeoPoint a = documentSnapshot.getGeoPoint("location");
+                       if (a == b[0]) {
+                           //code
+                       }
+
+                   }
+               }
+           }
+            );
+        }
+*/
 
     }
 
