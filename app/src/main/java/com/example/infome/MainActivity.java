@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     EditText genProInput;
     Button submitButton;
 
-    public DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("user locations").document("John");
+    public DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("user locations").document("popo");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
