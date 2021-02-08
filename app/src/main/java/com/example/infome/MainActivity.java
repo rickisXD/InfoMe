@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Button fetchButton;
     TextView fetchInfo;
 
-    public DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("user locations").document("popo");
+    public DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("user locations").document("John");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         if(documentSnapshot.exists()){
                             String name = documentSnapshot.getString("name");
                             String genPro = documentSnapshot.getString("genpro");
-                            fetchInfo.setText(name);
+                            fetchInfo.setText("Name: " + name + "\n" + "Gender and Pronouns: " + genPro);
 
                         }
                     }
