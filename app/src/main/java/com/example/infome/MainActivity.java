@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     EditText nameInput;
     EditText genProInput;
     Button submitButton;
+    Button fetchButton;
+    TextView fetchInfo;
 
     public DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("user locations").document("John");
 
@@ -55,6 +60,25 @@ public class MainActivity extends AppCompatActivity {
                 dataToSave.put("name", name);
                 dataToSave.put("genpro", genPro);
                 mDocRef.set(dataToSave);
+            }
+        });
+
+        fetchInfo = (TextView) findViewById(R.id.fetchInfo);
+        fetchButton = (Button) findViewById(R.id.fetchButton);
+        fetchButton.setOnClickListener(new View.OnClickListener(){
+            //@Override
+            public void onClick(View v){
+                mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    //@Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()){
+                            String name = documentSnapshot.getString("name");
+                            String genPro = documentSnapshot.getString("genpro");
+                            fetchInfo.setText(name);
+
+                        }
+                    }
+                });
             }
         });
 
